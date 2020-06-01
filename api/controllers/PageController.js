@@ -7,12 +7,17 @@
 
 module.exports = {
   
+    redirect: function(req, res){
+        return res.redirect('/products')
+    },
+
     addProduct: function(req, res){
         let product = {};
 
         product = {
             name: req.body.name,
             description: req.body.description,
+            short_description: req.body.short_description,
             price: req.body.price
         };
 
@@ -29,8 +34,18 @@ module.exports = {
             if(err){
                 return err;
             }
-            return res.send({products: products});
+            return res.view('pages/products', {products: products, layout: 'layouts/layout'});
         });
-    }
+    },
+
+    viewDatabase: function(req, res){
+        Products.find().exec(function(err, products){
+            if(err){
+                return err;
+            }
+
+            return res.json(products);
+        });
+    },
 };
 

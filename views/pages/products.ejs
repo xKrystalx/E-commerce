@@ -9,5 +9,30 @@
     <div class = "sticky-top shadow-lg p-3">
         <a href = "/products/add" class = "btn btn-outline-dark">Add a Product</a>
     </div>
+    <div class = "products-list col-sm-6 mx-auto">
+        <h1 class = 'text-muted' style = "margin-bottom: 50px; margin-top: 50px;">Products:</h1>
+        <%products.forEach(function(product,idx){ %>
+            <div class = "card">
+                <div class = 'row no-gutters' data-toggle = 'collapse' data-target = '#collapse<%=product.id%>' aria-expanded = false aria-controls = 'collapse<%= product.id %>'>
+                    <div class = 'col-md-2' style = 'display:flex; align-items: center;'>
+                        <img src = "images/pigCOOL.png" class = "card-img-left mx-auto" alt = "..." style = "max-width: 96px; width: 100%;">
+                    </div>
+                    <div class = 'card-body col-md-8 p-3'>
+                        <h5 class = 'card-title'><%= product.name %></h5>
+                        <h6 class = 'card-subtitle text-muted'><%= product.short_description %></h6>
+                    </div>
+                    <div class = 'col-md-2 p-3'>
+                        <h5><%= product.price %> PLN</h5>
+                        <a href = '/products/add-to-cart/<%= product.id %>' class = 'btn btn-success'>Add to Cart</a>
+                    </div>
+                </div>
+                <div class = 'collapse text-muted text-justify font-weight-light p-2' style = 'text-indent: 2em;' id = 'collapse<%= product.id %>'>
+                <p>
+                    <%= product.description %> 
+                </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
 </body>
 </html>

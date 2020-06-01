@@ -18,6 +18,10 @@ module.exports = {
       required: true
     },
 
+    short_description: {
+      type: 'string',
+    },
+
     description: {
       type: 'string'
     },

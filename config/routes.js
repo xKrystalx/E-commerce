@@ -19,8 +19,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/products' },
+  'get /' : 'PageController.redirect',
   'get /products' : 'PageController.viewProducts',
+  'get /products/database' : 'PageController.viewDatabase',
   'get /products/:id' : 'PageController.viewProduct',
   'get /products/add' : { view: 'pages/addProduct' },
   'post /products/add-product' : 'PageController.addProduct',
