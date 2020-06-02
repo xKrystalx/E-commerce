@@ -6,23 +6,67 @@
     <title>Blep</title>
 </head>
 <body>
-    <div class = "sticky-top shadow-lg p-3">
-        <a href = "/products/add" class = "btn btn-outline-dark">Add a Product</a>
+    <div class = "fixed-top">
+        <div class = "shadow-lg p-3 row bg-white" style = "height: 10%;">
+            <div class = 'col-sm-2'>
+                <a href = "/products/add" class = "btn btn-outline-dark">Add a Product</a>
+            </div>
+            <div class = 'col-sm-8'>
+            </div>
+            <div class = 'col-sm-2'>
+                <div class = "dropdown-toggle text-muted" data-toggle = "collapse" data-target="#navbar-cart" aria-expanded = "false" aria-controls="navbar-cart" style = "text-align:center;font-size:1.25em;">
+                    Cart <span class = "badge badge-pill badge-dark"><% if(cart != undefined) { %>
+                    <%= Object.keys(cart.items).length %> 
+                    <%} else {%> 
+                    <%=0%>
+                    <%}%></span>
+                </div>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-sm-2 col-xl-9">
+            </div>
+            <div class = "col-sm-8 col-xl-3 bg-white p-2 collapse" id = "navbar-cart" style="box-shadow: 0 2rem 3rem rgba(0,0,0,.175) !important;">
+                <% if (cart != undefined) { 
+                    Object.keys(cart.items).forEach(function(item){ %>
+                    <div class = "row">
+                        <div class = "col-sm-2">
+                            <img src = "images/pigCOOL.png" alt = "...">
+                        </div>
+                        <div class = "col-sm-4">
+                            <%= cart.items[item].product.name %> 
+                        </div>
+                        <div class = "col-sm-2 text-muted">
+                            <%= cart.items[item].qty %>x
+                        </div>
+                        <div class = "col-sm-3 text-muted">
+                            <%= cart.items[item].product.price * cart.items[item].qty %> PLN
+                        </div>
+                    </div>
+                   <% }); %>
+                   <hr>
+                   <div class = "text-muted">
+                        Total: <%= cart.totalPrice %> PLN<a href = "/cart" class = "btn btn-success ml-3">View Cart</a>
+                    </div>
+               <% } %> 
+            </div>
+        </div>
     </div>
     <div class = "products-list col-sm-6 mx-auto">
-        <h1 class = 'text-muted' style = "margin-bottom: 50px; margin-top: 50px;">Products:</h1>
+        <h1 class = 'text-muted' style = "margin-bottom: 50px; margin-top: 100px;">Products:</h1>
         <%products.forEach(function(product,idx){ %>
             <div class = "card">
                 <div class = 'row no-gutters' data-toggle = 'collapse' data-target = '#collapse<%=product.id%>' aria-expanded = false aria-controls = 'collapse<%= product.id %>'>
                     <div class = 'col-md-2' style = 'display:flex; align-items: center;'>
-                        <img src = "images/pigCOOL.png" class = "card-img-left mx-auto" alt = "..." style = "max-width: 96px; width: 100%;">
+                        <img src = "/images/pigCOOL.png" class = "card-img-left mx-auto" alt = "..." style = "max-width: 96px; width: 100%;">
                     </div>
-                    <div class = 'card-body col-md-8 p-3'>
+                    <div class = 'card-body col-md-6 p-3'>
                         <h5 class = 'card-title'><%= product.name %></h5>
                         <h6 class = 'card-subtitle text-muted'><%= product.short_description %></h6>
                     </div>
-                    <div class = 'col-md-2 p-3'>
+                    <div class = 'col-md-4 p-3'>
                         <h5><%= product.price %> PLN</h5>
+                        <a href= 'products/<%= product.id %>' class = 'btn btn-outline-dark'>View Product</a>
                         <a href = '/products/add-to-cart/<%= product.id %>' class = 'btn btn-success'>Add to Cart</a>
                     </div>
                 </div>

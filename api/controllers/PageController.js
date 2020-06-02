@@ -34,7 +34,18 @@ module.exports = {
             if(err){
                 return err;
             }
-            return res.view('pages/products', {products: products, layout: 'layouts/layout'});
+            
+            return res.view('pages/products', {products: products, cart: req.session.cart, layout: 'layouts/layout'});
+        });
+    },
+
+    viewProduct: function(req, res){
+        Products.findOne({id: req.param('id')}).exec(function(err, product){
+            if(err){
+                return err;
+            }
+
+            return res.view('pages/product', {product: product, cart: req.session.cart, layout: 'layouts/layout'});
         });
     },
 

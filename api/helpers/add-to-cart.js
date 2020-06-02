@@ -4,27 +4,38 @@ module.exports = {
   friendlyName: 'Add to cart',
 
 
-  description: '',
+  description: 'Title',
 
 
   inputs: {
+      productID:{
+        type: 'string',
+        required: true
+      },
 
+      productQuantity:{
+        type: 'number',
+        required: true
+      }
   },
 
+  fn: async function (inputs, exits) {
+    
+    var product = await Products.findOne({id: inputs.productID});
 
-  exits: {
+    var cart = {
+      items: {},
+      totalQuantity: inputs.productQuantity,
+      totalPrice: product.price
+    };
 
-    success: {
-      description: 'All done.',
-    },
+    cart.items['item' + product.id] = {
+      qty: inputs.productQuantity,
+      product: product
+    };
 
-  },
-
-
-  fn: async function (inputs) {
-    // TODO
+    return exits.success(cart);
   }
-
 
 };
 

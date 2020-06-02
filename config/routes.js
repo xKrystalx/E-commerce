@@ -25,8 +25,8 @@ module.exports.routes = {
   'get /products/:id' : 'PageController.viewProduct',
   'get /products/add' : { view: 'pages/addProduct' },
   'post /products/add-product' : 'PageController.addProduct',
-  'get /cart' : 'CartController.showCart',
-  'post /products/add-to-cart/:id': 'CartController.addToCart',
+  'get /cart' : 'CartController.viewCart',
+  'get /products/add-to-cart/:id': 'CartController.addToCart',
 
 
 
