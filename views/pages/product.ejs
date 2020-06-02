@@ -6,7 +6,7 @@
     <title>Blep</title>
 </head>
 <body>
-    <div class = "sticky-top">
+    <div class = "fixed-top">
         <div class = "shadow-lg p-3 row bg-white" style = "height: 10%;">
             <div class = 'col-sm-2'>
                 <a href = "/products" class = "btn btn-outline-dark">Home</a>
@@ -30,16 +30,16 @@
                 <% if (cart != undefined) { 
                     Object.keys(cart.items).forEach(function(item){ %>
                     <div class = "row">
-                        <div class = "col-sm-2">
+                        <div class = "col">
                             <img src = "/images/pigCOOL.png" alt = "...">
                         </div>
-                        <div class = "col-sm-4">
+                        <div class = "col-6" style = "margin-left: 15px;">
                             <%= cart.items[item].product.name %> 
                         </div>
-                        <div class = "col-sm-2 text-muted">
+                        <div class = "col text-muted">
                             <%= cart.items[item].qty %>x
                         </div>
-                        <div class = "col-sm-3 text-muted">
+                        <div class = "col-3 text-muted">
                             <%= cart.items[item].product.price * cart.items[item].qty %> PLN
                         </div>
                     </div>
@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class = 'mx-auto col-sm-10 col-xl-8'>
-        <div class = "row" style = "margin-top:150px">
+        <div class = "row" style = "margin-top:200px">
             <div class = "rounded col-sm-10 col-xl-5" style = "background-color: rgb(233, 233, 233); width:512px; height:512px;">
                 <img class = "img-fluid" src = '/images/pigCOOL.png' alt = "..." style = "height: 100%;">
             </div>
@@ -62,8 +62,12 @@
                 <div class = "text-muted" style = "margin-top: 50px; text-indent: 2em;">
                     <%=product.description%>    
                 </div>
+                <div class = "row" style = "align-items: center;">
+                    <a class = "btn btn-success cpl" href = "/products/add-to-cart/<%=product.id%>" style = "margin-top: 10px; margin-left: 20px;">Add to Cart</a>
+                    <div class = "col" style = "font-size: 1.25em; font-weight: bolder;"><%=product.price%> PLN</div>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 </body>
 </html>

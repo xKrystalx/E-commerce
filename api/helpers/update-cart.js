@@ -12,6 +12,10 @@ module.exports = {
       type: 'ref',
       required: true
     },
+    edited:{
+      type: 'boolean',
+      required: true
+    },
   },
 
 
@@ -39,13 +43,18 @@ module.exports = {
 
       var updatedCart = currentCart;
 
-      updatedCart.items[productID].qty = qty;
+      if(inputs.edited){
+        updatedCart.items[productID].qty = qty;
+      }
+      else{
+        updatedCart.items[productID].qty += qty;
+      }
 
       updatedCart.totalQuantity = updatedCart.totalQuantity - oldQuantity;
       updatedCart.totalPrice = updatedCart.totalPrice - oldPrice;
 
-      updatedCart.totalQuantity += qty;
-      updatedCart.totalPrice += updatedCart.items[productID].product.price * qty;
+      updatedCart.totalQuantity += updatedCart.items[productID].qty;
+      updatedCart.totalPrice += updatedCart.items[productID].product.price * updatedCart.items[productID].qty;
     }
     else{
       //push new item

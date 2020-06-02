@@ -30,16 +30,16 @@
                 <% if (cart != undefined) { 
                     Object.keys(cart.items).forEach(function(item){ %>
                     <div class = "row">
-                        <div class = "col-sm-2">
-                            <img src = "images/pigCOOL.png" alt = "...">
+                        <div class = "col">
+                            <img src = "/images/pigCOOL.png" alt = "...">
                         </div>
-                        <div class = "col-sm-4">
+                        <div class = "col-6" style = "margin-left: 15px;">
                             <%= cart.items[item].product.name %> 
                         </div>
-                        <div class = "col-sm-2 text-muted">
+                        <div class = "col text-muted">
                             <%= cart.items[item].qty %>x
                         </div>
-                        <div class = "col-sm-3 text-muted">
+                        <div class = "col-3 text-muted">
                             <%= cart.items[item].product.price * cart.items[item].qty %> PLN
                         </div>
                     </div>

@@ -8,7 +8,7 @@
 module.exports = {
     addToCart: async function(req, res){ 
         if(req.session.cart){
-            var updateCart = await sails.helpers.updateCart(req);
+            var updateCart = await sails.helpers.updateCart(req, false);
 
             req.session.cart = updateCart;
 
