@@ -27,6 +27,41 @@ module.exports = {
             return res.view('pages/cart', {cart: req.session.cart, layout: 'layouts/layout'});
         }
         else return res.redirect('back');
-    }
+    },
+
+    processOrder: function(req, res){
+        if(req.session.cart){
+            var data = {
+                products: req.session.cart.items,
+                total: req.session.cart.totalPrice,
+                paid: false,
+            }
+            var order = Order.create(data).fetch().exec(function(err, order){
+                if(err) return err;
+
+                var shajs = require('sha.js');
+                var digest = shajs('sha256').update('hmfhwDaT6b2pStGUMuG8GLWSNSBMJ3zr722484'+req.session.cart.totalPrice+'PLN'+order.id+'http://localhost:1337/order_completed/'+order.id+'0').digest('hex');
+                return res.redirect('https://ssl.dotpay.pl/test_payment/?id=722484&amount='+req.session.cart.totalPrice+'&currency=PLN&url=http://localhost:1337/order_completed/'+order.id+'&description='+order.id+'&type=0&chk='+digest);
+            });
+        }
+        else return res.redirect('back');
+    },
+
+    viewOrders: function(req, res){
+        Order.find().exec(function(err, orders){
+            if(err) return err;
+            return res.json(orders);
+        });
+    },
+
+    orderCompleted: async function(req, res){
+        var order = await Order.updateOne({id: req.param('id')})
+        .set({
+            paid: true,
+        });
+        if(order){
+            return res.view('pages/order_completed', {order: order, layout: 'layouts/layout'});
+        }  
+    },
 };
 

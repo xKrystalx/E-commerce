@@ -21,6 +21,10 @@ module.exports = {
       type: 'number'
     },
 
+    paid:{
+      type: 'boolean',
+    },
+
     createdAt: { 
       type: 'number', 
       autoCreatedAt: true, 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order #<%=order.id%></title>
+</head>
+<body>
+    <div class = "sticky-top shadow-lg p-3 bg-white">
+        <a href = "/" class = "btn btn-outline-dark">Home</a>
+    </div>
+    <div class = "products-list col-sm-6 mx-auto">
+        <h1 class = 'text-muted' style = "margin-bottom: 50px; margin-top: 100px;">Order #<%=order.id%></h1>
+        <% if (order != undefined) { 
+            Object.keys(order.products).forEach(function(item){ %>
+            <div class = "row">
+                <div class = "col">
+                    <img src = "/images/pigCOOL.png" alt = "...">
+                </div>
+                <div class = "col-6" style = "margin-left: 15px;">
+                    <%= order.products[item].product.name %> 
+                </div>
+                <div class = "col text-muted">
+                    <%= order.products[item].qty %>x
+                </div>
+                <div class = "col-3 text-muted">
+                    <%= order.products[item].product.price * order.products[item].qty %> PLN
+                </div>
+            </div>
+           <% }); %>
+           <hr>
+           <div class = "text-muted">
+                Total: <%= order.total %> PLN
+            </div>
+        <% } %> 
+    </div>
+</body>
+</html>
