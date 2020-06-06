@@ -30,6 +30,7 @@ module.exports.routes = {
   'get /order': 'CartController.processOrder',
   'get /orders': 'CartController.viewOrders',
   'get /order_completed/:id*': 'CartController.orderCompleted',
+  'post /order_completed/:id*': 'CartController.orderCompleted',
 
 
 

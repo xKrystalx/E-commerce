@@ -42,14 +42,14 @@ module.exports = {
       oldPrice = currentCart.items[productID].qty * currentCart.items[productID].product.price;
 
       var updatedCart = currentCart;
-
+      //if just adding another item through AddToCart button add to quantity, if editing the final value - overwrite (unused here)
       if(inputs.edited){
         updatedCart.items[productID].qty = qty;
       }
       else{
         updatedCart.items[productID].qty += qty;
       }
-
+      //update total quantities and prices
       updatedCart.totalQuantity = updatedCart.totalQuantity - oldQuantity;
       updatedCart.totalPrice = updatedCart.totalPrice - oldPrice;
 
