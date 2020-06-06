@@ -20,7 +20,7 @@ module.exports = {
             short_description: req.body.short_description,
             price: req.body.price
         };
-
+        //create a new product
         Products.create(product).fetch().exec(function(err, product){
             if(err){
                 return err;

@@ -36,9 +36,10 @@ module.exports = {
                 total: req.session.cart.totalPrice,
                 paid: false,
             }
+            //create a new order to get its id
             var order = Order.create(data).fetch().exec(function(err, order){
                 if(err) return err;
-
+                //DotPay requires a sha256 checksum that consists of parameters sent in the url and a few others
                 var shajs = require('sha.js');
                 var digest = shajs('sha256').update('hmfhwDaT6b2pStGUMuG8GLWSNSBMJ3zr722484'+req.session.cart.totalPrice+'PLN'+order.id+'http://localhost:1337/order_completed/'+order.id+'0').digest('hex');
                 return res.redirect('https://ssl.dotpay.pl/test_payment/?id=722484&amount='+req.session.cart.totalPrice+'&currency=PLN&url=http://localhost:1337/order_completed/'+order.id+'&description='+order.id+'&type=0&chk='+digest);
