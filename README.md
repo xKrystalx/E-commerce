@@ -2,7 +2,7 @@
 
 Mini sklep internetowy wykorzystujący framework Sails.js
  
-#Creator
+# Creator
 
 Aleksander Bober
 GiTI
